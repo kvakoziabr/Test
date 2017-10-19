@@ -104,38 +104,6 @@ namespace Test.ViewModel
             }
         }
 
-
-        //Команда удаления пользователей
-        private RelayCommand removeUser;
-        public RelayCommand RemoveUser
-        {
-            get
-            {
-                return removeUser ??
-                    (removeUser = new RelayCommand(obj =>
-                    {
-                        try
-                        {   
-                            if (selectedCompany != null)
-                            {   
-                                //Удаляем выбранного пользователя, и сохраняем изменения
-                                context.Users.Remove(SelectedUser);
-                                SelectedCompanyUsers.Remove(SelectedUser);
-                                context.SaveChanges();
-                            }
-                        }
-                        catch (Exception e)
-                        {   //Если по какой-то причине операция прошла неуспешно, то выводим сообщение с исключением. 
-                            //Так же загружаем в программу корректные данные из базы данных
-                            MessageBox.Show(e.Message);
-                            LoadFromDataBase();
-                        }
-                    },
-                    (obj => SelectedUser != null))); //Команда активна, только если выбран какой-то пользователь
-            }
-        }
-
-
         //Команда обновления компаний
         private RelayCommand updateCompanys;
         public RelayCommand UpdateCompanys
@@ -201,10 +169,41 @@ namespace Test.ViewModel
 
                         }
                     },
-                    //Команда активна, только если в текущем контекте данных выбранную компанию.
+                    //Команда активна, только если в текущем контекте данных мы нашли выбранную компанию из коллекции.
                     //Таким образом, если мы выбрали компанию и измени какие-либо даные о ней, или же добавили новую компанию
                     //Но при этом не подтвердили изменения и не отправили их в бд, работать с пользователями данной компании будет нельзя
                     (obj => FindInDbSet())));
+            }
+        }
+
+        //Команда удаления пользователей
+        private RelayCommand removeUser;
+        public RelayCommand RemoveUser
+        {
+            get
+            {
+                return removeUser ??
+                    (removeUser = new RelayCommand(obj =>
+                    {
+                        try
+                        {
+                            if (selectedCompany != null)
+                            {
+                                //Удаляем выбранного пользователя, и сохраняем изменения
+                                context.Users.Remove(SelectedUser);
+                                SelectedCompanyUsers.Remove(SelectedUser);
+                                context.SaveChanges();
+                            }
+                        }
+                        catch (Exception e)
+                        {   //Если по какой-то причине операция прошла неуспешно, то выводим сообщение с исключением. 
+                            //Так же загружаем в программу корректные данные из базы данных
+                            MessageBox.Show(e.Message);
+                            LoadFromDataBase();
+                        }
+                    },
+                    //Условие срабатывание команды аналогично предыдущему, за исключение того что тут нам необходимо так же  ещё выбрать пользователя
+                    (obj => SelectedUser != null && FindInDbSet())));
             }
         }
 

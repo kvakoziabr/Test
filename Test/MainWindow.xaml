@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Test" Height="461.862" Width="662" Loaded="Window_Loaded" MinWidth="660" MinHeight="460">
+        Title="Test" Height="461.862" Width="662" Loaded="Window_Loaded" MinWidth="670" MinHeight="470">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="468*"/>
@@ -29,13 +29,13 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Margin="10,10,10,140" Grid.Column="1" Grid.Row="1" Command="{Binding RemoveCompanyCommand}">
+        <Button Margin="10,10,10,140" Height="30" Grid.Column="1" Grid.Row="1" Command="{Binding RemoveCompanyCommand}">
             <Button.Content>
                 <TextBlock FontSize="12" >-</TextBlock>
             </Button.Content>
         </Button>
 
-        <Button Margin="10,10,10,140" Grid.Column="2" Grid.Row="1" Command="{Binding UpdateCompanys}">
+        <Button Margin="10,10,10,140" Height="30" Grid.Column="2" Grid.Row="1" Command="{Binding UpdateCompanys}">
             <Button.Content>
                 <TextBlock FontSize="12" >Update</TextBlock>
             </Button.Content>
@@ -52,13 +52,13 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Margin="10,10,10,140" Grid.Column="1" Command="{Binding RemoveUser}" Grid.Row="3">
+        <Button Margin="10,10,10,140" Height="30" Grid.Column="1" Command="{Binding RemoveUser}" Grid.Row="3">
             <Button.Content>
                 <TextBlock FontSize="12" >-</TextBlock>
             </Button.Content>
         </Button>
 
-        <Button Margin="10,10,10,140" Grid.Column="2" Grid.Row="3" Command="{Binding UpdateUsers}">
+        <Button Margin="10,10,10,140"  Height="30" Grid.Column="2" Grid.Row="3" Command="{Binding UpdateUsers}">
             <Button.Content>
                 <TextBlock FontSize="12" >Update</TextBlock>
             </Button.Content>
